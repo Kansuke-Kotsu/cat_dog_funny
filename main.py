@@ -75,167 +75,169 @@ def pil2cv(image):
         new_image = cv2.cvtColor(new_image, cv2.COLOR_RGB2BGR)
     elif new_image.shape[2] == 4:  # 透過
         new_image = cv2.cvtColor(new_image, cv2.COLOR_RGBA2BGRA)
-    return new_image
-    
-def rand_logic(param):
-    rd = random.randint(100, 200)
-    if rd%2==0:
-        upload_image = st.file_uploader("猫っぽい犬の画像を選択しよう!", type="jpg")
-        if upload_image:
-            model = load_model(param)
-            image = Image.open(upload_image)
-            img_array = np.array(image)
-            st.image(img_array, width=100)
-            img = pil2cv(image)
-            img = cv2.resize(img, (64, 64))
-            # predict
-            prd = model.predict(np.array([img]))
-            print(prd) # 精度の表示
-            prelabel = np.argmax(prd, axis=1)
-            if prelabel == 0:
-                st.write(math.floor(prd[0][0]*100), "すごい！君の勝ちだ！")
-            elif prelabel == 1:
-                st.write(math.floor(prd[0][1]*100), "残念、、AIを甘く見ちゃいけないよ")
-    elif rd%2==1:
-        upload_image = st.file_uploader("犬っぽい猫の画像を選択しよう!", type="jpg")
-        if upload_image:
-            model = load_model(param)
-            image = Image.open(upload_image)
-            img_array = np.array(image)
-            st.image(img_array, width=100)
-            img = pil2cv(image)
-            img = cv2.resize(img, (64, 64))
-            # predict
-            prd = model.predict(np.array([img]))
-            print(prd) # 精度の表示
-            prelabel = np.argmax(prd, axis=1)
-            if prelabel == 1:
-                st.write(math.floor(prd[0][0]*100), "すごい！君の勝ちだ！")
-            elif prelabel == 0:
-                st.write(math.floor(prd[0][1]*100), "残念、、AIを甘く見ちゃいけないよ")   
+    return new_image 
 
 # contents
 st.title("AIをだませ!! <Dog or Cat?>")
 def index():
-    st.write("ここは **Indexページ** です。")
-    pop_btn(label=f"初級:学習回数1回、正確性57%",layer=1,onclick=lambda:[count()])
-    pop_btn(label=f"中級:学習回数5回、正確性71%",layer=2,onclick=lambda:[count()])
-    pop_btn(label=f"上級:学習回数20回、正確性94%",layer=3,onclick=lambda:[count()])
+    pop_btn(label=f"初級:普通にやっても2回に1回で誤認識します",layer=1,onclick=lambda:[count()])
+    pop_btn(label=f"中級:ふつうに普通",layer=4,onclick=lambda:[count()])
+    pop_btn(label=f"上級:こいつだませたら大したもん",layer=7,onclick=lambda:[count()])
+    st.write("")
+    st.write("遊び方")
+    st.write("犬と猫を見分けるAIに、猫っぽい犬or犬っぽい猫の画像を見せて、バグらせよう!")
+    st.write("レベルを選んで画像をアップ!")
 def level1():
-    st.write("初級")
-    rd = random.randint(100, 200)
-    if rd%2==0:
-        upload_image = st.file_uploader("猫っぽい犬の画像を選択しよう!", type="jpg")
-        if upload_image:
-            model = load_model(keras_param1)
-            image = Image.open(upload_image)
-            img_array = np.array(image)
-            st.image(img_array, width=100)
-            img = pil2cv(image)
-            img = cv2.resize(img, (64, 64))
-            # predict
-            prd = model.predict(np.array([img]))
-            print(prd) # 精度の表示
-            prelabel = np.argmax(prd, axis=1)
-            if prelabel == 0:
-                st.write(math.floor(prd[0][0]*100), "すごい！君の勝ちだ！")
-            elif prelabel == 1:
-                st.write(math.floor(prd[0][1]*100), "残念、、AIを甘く見ちゃいけないよ")
-    elif rd%2==1:
-        upload_image = st.file_uploader("犬っぽい猫の画像を選択しよう!", type="jpg")
-        if upload_image:
-            model = load_model(keras_param1)
-            image = Image.open(upload_image)
-            img_array = np.array(image)
-            st.image(img_array, width=100)
-            img = pil2cv(image)
-            img = cv2.resize(img, (64, 64))
-            # predict
-            prd = model.predict(np.array([img]))
-            print(prd) # 精度の表示
-            prelabel = np.argmax(prd, axis=1)
-            if prelabel == 1:
-                st.write(math.floor(prd[0][0]*100), "すごい！君の勝ちだ！")
-            elif prelabel == 0:
-                st.write(math.floor(prd[0][1]*100), "残念、、AIを甘く見ちゃいけないよ")
+    st.write("初級「学習回数1回、正確性57%」")
+    st.write("あなたが持っているのは・・・")
+    pop_btn(label=f"猫っぽい犬の画像",layer=2,onclick=lambda:[count()])
+    pop_btn(label=f"犬っぽい猫の画像",layer=3,onclick=lambda:[count()])
     back_btn()
 def level2():
-    st.write("中級")
-    rd = random.randint(100, 200)
-    if rd%2==0:
-        upload_image = st.file_uploader("猫っぽい犬の画像を選択しよう!", type="jpg")
-        if upload_image:
-            model = load_model(keras_param5)
-            image = Image.open(upload_image)
-            img_array = np.array(image)
-            st.image(img_array, width=100)
-            img = pil2cv(image)
-            img = cv2.resize(img, (64, 64))
-            # predict
-            prd = model.predict(np.array([img]))
-            print(prd) # 精度の表示
-            prelabel = np.argmax(prd, axis=1)
-            if prelabel == 0:
-                st.write(math.floor(prd[0][0]*100), "すごい！君の勝ちだ！")
-            elif prelabel == 1:
-                st.write(math.floor(prd[0][1]*100), "残念、、AIを甘く見ちゃいけないよ")
-    elif rd%2==1:
-        upload_image = st.file_uploader("犬っぽい猫の画像を選択しよう!", type="jpg")
-        if upload_image:
-            model = load_model(keras_param5)
-            image = Image.open(upload_image)
-            img_array = np.array(image)
-            st.image(img_array, width=100)
-            img = pil2cv(image)
-            img = cv2.resize(img, (64, 64))
-            # predict
-            prd = model.predict(np.array([img]))
-            print(prd) # 精度の表示
-            prelabel = np.argmax(prd, axis=1)
-            if prelabel == 1:
-                st.write(math.floor(prd[0][0]*100), "すごい！君の勝ちだ！")
-            elif prelabel == 0:
-                st.write(math.floor(prd[0][1]*100), "残念、、AIを甘く見ちゃいけないよ")
+    st.write("中級「学習回数5回、正確性71%」")
+    pop_btn(label=f"猫っぽい犬の画像",layer=5,onclick=lambda:[count()])
+    pop_btn(label=f"犬っぽい猫の画像",layer=6,onclick=lambda:[count()])
     back_btn()
 def level3():
-    st.write("上級")
-    rd = random.randint(100, 200)
-    if rd%2==0:
-        upload_image = st.file_uploader("猫っぽい犬の画像を選択しよう!", type="jpg")
-        if upload_image:
-            model = load_model(keras_param20)
-            image = Image.open(upload_image)
-            img_array = np.array(image)
-            st.image(img_array, width=100)
-            img = pil2cv(image)
-            img = cv2.resize(img, (64, 64))
-            # predict
-            prd = model.predict(np.array([img]))
-            print(prd) # 精度の表示
-            prelabel = np.argmax(prd, axis=1)
-            if prelabel == 0:
-                st.write(math.floor(prd[0][0]*100), "すごい！君の勝ちだ！")
-            elif prelabel == 1:
-                st.write(math.floor(prd[0][1]*100), "残念、、AIを甘く見ちゃいけないよ")
-    elif rd%2==1:
-        upload_image = st.file_uploader("犬っぽい猫の画像を選択しよう!", type="jpg")
-        if upload_image:
-            model = load_model(keras_param20)
-            image = Image.open(upload_image)
-            img_array = np.array(image)
-            st.image(img_array, width=100)
-            img = pil2cv(image)
-            img = cv2.resize(img, (64, 64))
-            # predict
-            prd = model.predict(np.array([img]))
-            print(prd) # 精度の表示
-            prelabel = np.argmax(prd, axis=1)
-            if prelabel == 1:
-                st.write(math.floor(prd[0][0]*100), "すごい！君の勝ちだ！")
-            elif prelabel == 0:
-                st.write(math.floor(prd[0][1]*100), "残念、、AIを甘く見ちゃいけないよ")
+    st.write("上級「学習回数20回、正確性94%」")
+    pop_btn(label=f"猫っぽい犬の画像",layer=8,onclick=lambda:[count()])
+    pop_btn(label=f"犬っぽい猫の画像",layer=9,onclick=lambda:[count()])
     back_btn()
-   
+    
+def level1_c():
+    st.write("初級「学習回数1回、正確性57%」")
+    upload_image = st.file_uploader(label="猫っぽい犬", type="jpg")
+    if upload_image:
+        model = load_model(keras_param1)
+        image = Image.open(upload_image)
+        img_array = np.array(image)
+        st.image(img_array, width=100)
+        img = pil2cv(image)
+        img = cv2.resize(img, (64, 64))
+        # predict
+        prd = model.predict(np.array([img]))
+        print(prd) # 精度の表示
+        result = math.floor(prd[0][0]*100)
+        st.write("犬:",result, "%","猫:",100 - result, "%")
+        if 100-result > 90:
+            st.write("完全に猫だ!頭がおかしくなりそうだよ!")
+        elif 100-result >50:
+            st.write("いい画像だ!確かに見る角度によっては猫だね!")
+        else:
+            st.write("これは、、犬だよね？")
+    back_btn()
+def level1_d():
+    st.write("初級「学習回数1回、正確性57%」")
+    upload_image = st.file_uploader(label="犬っぽい猫", type="jpg")
+    if upload_image:
+        model = load_model(keras_param1)
+        image = Image.open(upload_image)
+        img_array = np.array(image)
+        st.image(img_array, width=100)
+        img = pil2cv(image)
+        img = cv2.resize(img, (64, 64))
+        # predict
+        prd = model.predict(np.array([img]))
+        result = math.floor(prd[0][0]*100)
+        st.write("犬:",result, "%","猫:",100 - result, "%")
+        if result > 90:
+            st.write("完全に犬だ!頭がおかしくなりそうだよ!")
+        elif result >50:
+            st.write("いい画像だ!確かに見る角度によっては犬だね!")
+        else:
+            st.write("これは、、猫だよね？")
+    back_btn()
+
+def level2_c():
+    st.write("初級「学習回数5回、正確性71%」")
+    upload_image = st.file_uploader(label="猫っぽい犬", type="jpg")
+    if upload_image:
+        model = load_model(keras_param5)
+        image = Image.open(upload_image)
+        img_array = np.array(image)
+        st.image(img_array, width=100)
+        img = pil2cv(image)
+        img = cv2.resize(img, (64, 64))
+        # predict
+        prd = model.predict(np.array([img]))
+        print(prd) # 精度の表示
+        result = math.floor(prd[0][0]*100)
+        st.write("犬:",result, "%","猫:",100 - result, "%")
+        if 100-result > 90:
+            st.write("完全に猫だ!頭がおかしくなりそうだよ!")
+        elif 100-result >50:
+            st.write("いい画像だ!確かに見る角度によっては猫だね!")
+        else:
+            st.write("これは、、犬だよね？")
+    back_btn()
+def level2_d():
+    st.write("初級「学習回数5回、正確性71%」")
+    upload_image = st.file_uploader(label="犬っぽい猫", type="jpg")
+    if upload_image:
+        model = load_model(keras_param5)
+        image = Image.open(upload_image)
+        img_array = np.array(image)
+        st.image(img_array, width=100)
+        img = pil2cv(image)
+        img = cv2.resize(img, (64, 64))
+        # predict
+        prd = model.predict(np.array([img]))
+        print(prd) # 精度の表示
+        result = math.floor(prd[0][0]*100)
+        st.write("犬:",result, "%","猫:",100 - result, "%")
+        if result > 90:
+            st.write("完全に犬だ!頭がおかしくなりそうだよ!")
+        elif result >50:
+            st.write("いい画像だ!確かに見る角度によっては犬だね!")
+        else:
+            st.write("これは、、猫だよね？")
+    back_btn()
+  
+def level3_c():
+    st.write("初級「学習回数20回、正確性94%」")
+    upload_image = st.file_uploader(label="猫っぽい犬", type="jpg")
+    if upload_image:
+        model = load_model(keras_param20)
+        image = Image.open(upload_image)
+        img_array = np.array(image)
+        st.image(img_array, width=100)
+        img = pil2cv(image)
+        img = cv2.resize(img, (64, 64))
+        # predict
+        prd = model.predict(np.array([img]))
+        print(prd) # 精度の表示
+        result = math.floor(prd[0][0]*100)
+        st.write("犬:",result, "%","猫:",100 - result, "%")
+        if 100-result > 90:
+            st.write("完全に猫だ!頭がおかしくなりそうだよ!")
+        elif 100-result >50:
+            st.write("いい画像だ!確かに見る角度によっては猫だね!")
+        else:
+            st.write("これは、、犬だよね？")
+    back_btn()
+def level3_d():
+    st.write("初級「学習回数20回、正確性94%」")
+    upload_image = st.file_uploader(label="犬っぽい猫", type="jpg")
+    if upload_image:
+        model = load_model(keras_param20)
+        image = Image.open(upload_image)
+        img_array = np.array(image)
+        st.image(img_array, width=100)
+        img = pil2cv(image)
+        img = cv2.resize(img, (64, 64))
+        # predict
+        prd = model.predict(np.array([img]))
+        print(prd) # 精度の表示
+        result = math.floor(prd[0][0]*100)
+        st.write("犬:",result, "%","猫:",100 - result, "%")
+        if result > 90:
+            st.write("完全に犬だ!頭がおかしくなりそうだよ!")
+        elif result >50:
+            st.write("いい画像だ!確かに見る角度によっては犬だね!")
+        else:
+            st.write("これは、、猫だよね？")
+    back_btn()
+
 # body
 init()
 st.session_state.ck=0
@@ -247,7 +249,19 @@ if _layer==0: # index
     index()
 elif _layer==1: # 初級
     level1()
-elif _layer==2: #中級
+elif _layer==2: 
+    level1_c()
+elif _layer==3:       
+    level1_d()
+elif _layer==4: # 中級
     level2()
-elif _layer==3: #上級        
+elif _layer==5:
+    level2_c()
+elif _layer==6: 
+    level2_d()
+elif _layer==7: #上級
     level3()
+elif _layer==8:
+    level3_c()
+elif _layer==9:
+    level3_d()
