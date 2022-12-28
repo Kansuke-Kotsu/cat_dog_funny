@@ -124,7 +124,7 @@ def level1_c():
         elif 100-result >50:
             st.write("いい画像だ!確かに見る角度によっては猫だね!")
         else:
-            st.write("これは、、犬だよね？")
+            st.write("残念、これは、、犬だ！")
     back_btn()
 def level1_d():
     st.write("初級「学習回数1回、正確性57%」")
@@ -145,7 +145,7 @@ def level1_d():
         elif result >50:
             st.write("いい画像だ!確かに見る角度によっては犬だね!")
         else:
-            st.write("これは、、猫だよね？")
+            st.write("残念、これは、、猫だ！")
     back_btn()
 
 def level2_c():
@@ -168,7 +168,7 @@ def level2_c():
         elif 100-result >50:
             st.write("いい画像だ!確かに見る角度によっては猫だね!")
         else:
-            st.write("これは、、犬だよね？")
+            st.write("ん、これは、犬だよね？")
     back_btn()
 def level2_d():
     st.write("初級「学習回数5回、正確性71%」")
@@ -190,7 +190,7 @@ def level2_d():
         elif result >50:
             st.write("いい画像だ!確かに見る角度によっては犬だね!")
         else:
-            st.write("これは、、猫だよね？")
+            st.write("犬っぽい画像を入れてみてくれるかな、？")
     back_btn()
   
 def level3_c():
@@ -235,7 +235,7 @@ def level3_d():
         elif result >50:
             st.write("いい画像だ!確かに見る角度によっては犬だね!")
         else:
-            st.write("これは、、猫だよね？")
+            st.write("断然猫だね")
     back_btn()
 
 # body
